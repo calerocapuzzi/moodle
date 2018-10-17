@@ -1,0 +1,43 @@
+n el header.html, añadimos la librería de JQUERY (si no está ya instalada):
+
+<script type=”text/javascript” src=”<?php echo $CFG->themewww .’/’. current_theme() ?>/jquery-1.2.6.min.js”></script>
+
+y posteriormente añadimos este código:
+
+<script language=”javascript”>
+$(document).ready(function() {
+$(“#left-column”).click(function(){
+$(“#middle-column”).fadeIn();
+$(this).toggleClass(“active”); return false;
+});
+$(“#right-column”).click(function(){
+$(“#middle-column”).fadeOut();
+$(this).toggleClass(“active”); return false;
+});
+});
+</script>
+
+El código lo que hace es algo tan “sencillo” cómo ocultar una columna al clicar en ella. No tiene una utilidad práctica, pero permite ver la potencia de trabajar con código de programación en los temas gráficos.
+
+El segundo código es más divertido, primero añadimos un código php en el header.html para obtener la ciudad del alumno y pintarla en la construcción del div page:
+
+<div id=”page” <?php
+echo “class=’”;
+if($USER->city==”") echo “default”;
+else echo $USER->city;
+echo “‘”;
+?>
+>
+
+Según esto, el <div id=”page”> pasaría a ser <div id=”page” class=”madrid”>, por ejemplo.
+
+Una vez que sabemos un dato de usuario podemos hacer cambios y juegos visuales vía css, por ejemplo:
+
+.madrid #header,
+.madrid #header-home{
+background-image:url(barca.jpg);
+background-repeat:repeat;
+height:120px;
+}
+
+Lo que hacemos con el código es pintar una imagen del Barça a todos aquellos que son del Madrid. Aparte de la pequeña broma, nos permite personalizar la apariencia dependiendo de la variable que leamos del usuario.
